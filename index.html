@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="BLK LOTENG - Portal Pendaftaran Pelatihan Vokasi dan Sertifikasi Resmi. Akses berbagai program pelatihan gratis untuk meningkatkan keahlian industri Anda.">
+    <meta name="keywords" content="BLK LOTENG, Balai Latihan Kerja, Pelatihan Vokasi, Sertifikasi Gratis, Lombok Tengah, Pelatihan Kerja 2024">
+    <meta name="author" content="Lalu Arif Trasna Ashari">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pelatihanloteng.vercel.app/">
+    <meta property="og:title" content="BLK LOTENG - Beranda Pelatihan Vokasi">
+    <meta property="og:description" content="Tingkatkan keahlian industri Anda dengan program pelatihan gratis dan sertifikasi resmi di BLK LOTENG.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://pelatihanloteng.vercel.app/">
+    <meta property="twitter:title" content="BLK LOTENG - Beranda Pelatihan Vokasi">
+    <meta property="twitter:description" content="Tingkatkan keahlian industri Anda dengan program pelatihan gratis dan sertifikasi resmi di BLK LOTENG.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200">
+
+    <!-- Security: Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.supabase.co; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self' data: https://*.supabase.co https://images.unsplash.com;">
+    <title>BLK LOTENG - Beranda Pelatihan Vokasi</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    <link rel="stylesheet" href="/style.css">
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        body {
+            background-color: #f8f9ff;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #00355f 0%, #0f4c81 100%);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col font-body-md text-on-surface">
+    <!-- TopNavBar -->
+    <header class="sticky top-0 z-50 w-full nav-blur border-b border-slate-200/50">
+        <nav class="max-w-[1200px] mx-auto px-4 md:px-8 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div
+                    class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined text-white">school</span>
+                </div>
+                <span class="text-xl font-black tracking-tight text-slate-800">BLK<span
+                        class="text-primary">LOTENG</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-10">
+                <a class="text-sm font-bold text-primary relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary"
+                    href="index.html">Beranda</a>
+                <a class="text-sm font-semibold text-slate-500 hover:text-primary transition-colors"
+                    href="#training-section">Pelatihan</a>
+                <a class="text-sm font-semibold text-slate-500 hover:text-primary transition-colors"
+                    href="cek-status.html">Cek Status</a>
+                <a class="text-sm font-semibold text-slate-500 hover:text-primary transition-colors"
+                    href="#">Bantuan</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="login.html"
+                    class="bg-primary text-white px-8 py-3 rounded-2xl font-black text-sm shadow-xl shadow-primary/25 hover:scale-105 active:scale-95 transition-premium">Masuk
+                    Admin</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="hero-gradient py-20 md:py-32 px-4">
+            <div class="max-w-[1000px] mx-auto text-center">
+                <div
+                    class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-white/90 text-xs font-bold tracking-wider uppercase mb-8 border border-white/10">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    Pendaftaran Angkatan 2024 Dibuka
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+                    Kuasai Keahlian Baru,<br>
+                    <span class="text-blue-200">Bangun Karir Masa Depan</span>
+                </h1>
+                <p class="text-lg md:text-xl text-blue-100/80 mb-12 max-w-2xl mx-auto leading-relaxed">
+                    Akses pelatihan vokasi standar industri dengan kurikulum praktis dan instruktur ahli. Siapkan diri
+                    Anda untuk tantangan industri global.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                    <!-- Stat Card 1 -->
+                    <div
+                        class="bg-white/10 backdrop-blur-xl px-8 py-6 rounded-[32px] flex items-center gap-5 text-white border border-white/10 shadow-2xl shadow-black/20">
+                        <div
+                            class="w-14 h-14 bg-blue-400/20 rounded-2xl flex items-center justify-center border border-blue-400/30">
+                            <span class="material-symbols-outlined text-blue-300 text-3xl">workspace_premium</span>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-3xl font-black tracking-tighter leading-none mb-1 text-white">100+</div>
+                            <div class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-200/70">Sertifikat
+                                Resmi</div>
+                        </div>
+                    </div>
+                    <!-- Stat Card 2 -->
+                    <div
+                        class="bg-white/10 backdrop-blur-xl px-8 py-6 rounded-[32px] flex items-center gap-5 text-white border border-white/10 shadow-2xl shadow-black/20">
+                        <div
+                            class="w-14 h-14 bg-blue-400/20 rounded-2xl flex items-center justify-center border border-blue-400/30">
+                            <span class="material-symbols-outlined text-blue-300 text-3xl">groups</span>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-3xl font-black tracking-tighter leading-none mb-1 text-white">5000+</div>
+                            <div class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-200/70">Alumni
+                                Sukses</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content (Grid Section) -->
+        <section class="max-w-[1200px] mx-auto py-16 px-4 md:px-8" id="training-section">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <h2 class="font-h2 text-h2 text-primary">Program Kejuruan Tersedia</h2>
+                    <p class="text-slate-500 mt-2">Pilih bidang yang sesuai dengan minat dan rencana karir Anda.</p>
+                </div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div class="flex flex-col items-center justify-center py-20" id="loading-state">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                <p class="mt-4 text-slate-600 font-medium">Memuat data pelatihan...</p>
+            </div>
+
+            <!-- Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden" id="training-grid">
+                <!-- Cards will be injected here by JavaScript -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="hidden text-center py-20" id="empty-state">
+                <span class="material-symbols-outlined text-6xl text-slate-300">search_off</span>
+                <p class="mt-4 text-slate-600">Belum ada pelatihan yang tersedia saat ini.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+        <div
+            class="max-w-[1200px] mx-auto py-12 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-lg font-black text-slate-800 dark:text-slate-200">BLK LOTENG</div>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a class="font-inter text-xs text-slate-500 hover:text-blue-600 hover:underline transition-all duration-200"
+                    href="#">Tentang Kami</a>
+                <a class="font-inter text-xs text-slate-500 hover:text-blue-600 hover:underline transition-all duration-200"
+                    href="#">Kontak</a>
+                <a class="font-inter text-xs text-slate-500 hover:text-blue-600 hover:underline transition-all duration-200"
+                    href="#">Syarat &amp; Ketentuan</a>
+                <a class="font-inter text-xs text-slate-500 hover:text-blue-600 hover:underline transition-all duration-200"
+                    href="#">Kebijakan Privasi</a>
+            </div>
+            <p class="font-inter text-xs text-slate-500">© 2024 BLK LOTENG Portal. Seluruh Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Logic JavaScript -->
+    <script>
+        // Supabase initialized via config.js
+        const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // UI Selectors
+        const loadingState = document.getElementById('loading-state');
+        const trainingGrid = document.getElementById('training-grid');
+        const emptyState = document.getElementById('empty-state');
+
+        // Security: HTML Sanitizer Helper
+        function escapeHTML(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        async function fetchTrainingData() {
+            try {
+                // Fetch Kejuruan with no-cache logic
+                const { data: kejuruan, error: kejuruanError } = await client
+                    .from('kejuruan')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (kejuruanError) throw kejuruanError;
+
+                console.log('Data Kejuruan dari Supabase:', kejuruan);
+
+                if (!kejuruan || kejuruan.length === 0) {
+                    showEmpty();
+                    return;
+                }
+
+                // Render each card
+                trainingGrid.innerHTML = '';
+                for (const item of kejuruan) {
+                    // Count pendaftar for this specific jurusaan_id
+                    const { count, error: countError } = await client
+                        .from('pendaftar')
+                        .select('*', { count: 'exact', head: true })
+                        .eq('jurusan_id', item.id);
+
+                    if (countError) console.error(countError);
+
+                    const remainingQuota = item.kuota_total - (count || 0);
+                    const isFull = remainingQuota <= 0;
+
+                    const cardHTML = createCardHTML(item, count || 0, remainingQuota, isFull);
+                    trainingGrid.insertAdjacentHTML('beforeend', cardHTML);
+                }
+
+                showGrid();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                loadingState.innerHTML = `
+                    <div class="text-center p-10 bg-red-50 rounded-3xl border border-red-100">
+                        <span class="material-symbols-outlined text-red-500 text-5xl mb-4">error</span>
+                        <p class="text-red-700 font-black tracking-tight">Gagal memuat data pelatihan</p>
+                        <p class="text-red-500/70 text-sm mt-1">${error.message}</p>
+                        <button onclick="location.reload()" class="mt-6 px-6 py-2 bg-red-500 text-white rounded-xl font-bold text-xs hover:bg-red-600 transition-colors">Coba Lagi</button>
+                    </div>
+                `;
+            }
+        }
+
+        function createCardHTML(item, currentEnrollment, remaining, isFull) {
+            const statusBadge = isFull
+                ? `<span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">Penuh</span>`
+                : `<span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">Tersedia</span>`;
+
+            const btnClass = isFull
+                ? "bg-slate-200 text-slate-500 cursor-not-allowed"
+                : "bg-gradient-to-r from-primary to-blue-600 text-white hover:scale-105 shadow-xl shadow-primary/20";
+
+            const btnDisabled = isFull ? "disabled" : "";
+            const btnLink = isFull ? "#" : `daftar.html?jurusan_id=${item.id}`;
+
+            // Image Logic: Robust check for valid URL
+            let displayImage = 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800';
+            if (item.image_url && item.image_url.startsWith('http')) {
+                displayImage = item.image_url;
+            }
+            const fallbackImage = 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800';
+
+            const safeName = escapeHTML(item.nama_kejuruan);
+            const safeDesc = escapeHTML(item.deskripsi || 'Membangun keahlian mendalam melalui kurikulum praktis yang disesuaikan dengan standar industri terbaru.');
+
+            return `
+                <div class="bg-white rounded-[40px] premium-shadow hover:scale-[1.02] transition-premium overflow-hidden flex flex-col h-full border border-slate-50 group">
+                    <div class="relative h-64 overflow-hidden bg-slate-200">
+                        <img src="${displayImage}" 
+                             onerror="this.src='${fallbackImage}'"
+                             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+                             alt="${safeName}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-80"></div>
+                        <div class="absolute bottom-6 left-6">
+                            ${statusBadge}
+                        </div>
+                    </div>
+                    <div class="p-10 flex flex-col flex-grow">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 bg-blue-50 text-primary rounded-xl flex items-center justify-center">
+                                <span class="material-symbols-outlined text-xl">category</span>
+                            </div>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Program Unggulan</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-800 mb-4 leading-tight tracking-tight">${safeName}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-8 flex-grow line-clamp-3">
+                            ${safeDesc}
+                        </p>
+                        
+                        <div class="bg-slate-50 rounded-3xl p-6 mb-8 border border-slate-100">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Kapasitas</span>
+                                <span class="text-sm font-black text-slate-800">${item.kuota_total} Peserta</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-primary transition-all duration-1000" style="width: ${((item.kuota_total - remaining) / item.kuota_total) * 100}%"></div>
+                            </div>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Sisa Kuota</span>
+                                <span class="text-sm font-black ${remaining < 5 ? 'text-red-500' : 'text-emerald-600'}">${remaining} Kursi</span>
+                            </div>
+                        </div>
+                        
+                        <a href="${btnLink}" ${btnDisabled} class="block w-full text-center py-5 rounded-[24px] font-black text-sm transition-premium ${btnClass}">
+                            ${isFull ? 'Kuota Telah Terpenuhi' : 'Ambil Pelatihan Ini'}
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showGrid() {
+            loadingState.classList.add('hidden');
+            trainingGrid.classList.remove('hidden');
+        }
+
+        function showEmpty() {
+            loadingState.classList.add('hidden');
+            emptyState.classList.remove('hidden');
+        }
+
+
+        // Initialize
+        window.onload = fetchTrainingData;
+    </script>
+</body>
+
+</html>

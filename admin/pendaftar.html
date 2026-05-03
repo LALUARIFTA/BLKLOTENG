@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Kelola Pendaftar - BLK LOTENG</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { background-color: #f8f9ff; }
+    </style>
+</head>
+<body class="font-body-md text-on-background">
+    <!-- SideNavBar -->
+    <aside class="hidden lg:flex flex-col h-screen fixed left-0 top-0 w-72 z-40 bg-[#001c37] text-white/70 shadow-2xl transition-premium">
+        <div class="p-8 mb-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <span class="material-symbols-outlined text-white">admin_panel_settings</span>
+                </div>
+                <div>
+                    <h2 class="text-lg font-black tracking-tighter text-white">BLK<span class="text-blue-400">LOTENG</span></h2>
+                    <p class="text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold">V1.2 Premium</p>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="flex-1 px-4 space-y-2">
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium" href="index.html">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="text-sm">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium" href="program.html">
+                <span class="material-symbols-outlined">school</span>
+                <span class="text-sm">Program Pelatihan</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 text-white bg-white/10 rounded-2xl font-bold transition-premium" href="pendaftar.html">
+                <span class="material-symbols-outlined">group</span>
+                <span class="text-sm">Manajemen Peserta</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium" href="instruktur.html">
+                <span class="material-symbols-outlined">record_voice_over</span>
+                <span class="text-sm">Instruktur</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium" href="sertifikasi.html">
+                <span class="material-symbols-outlined">verified</span>
+                <span class="text-sm">Sertifikasi</span>
+            </a>
+        </nav>
+
+        <div class="p-6 border-t border-white/5 mt-auto">
+            <a class="flex items-center gap-3 px-6 py-4 text-red-400 hover:bg-red-500/10 rounded-2xl font-bold transition-premium" href="../index.html">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="text-sm">Keluar Sesi</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="lg:ml-72 min-h-screen">
+        <header class="flex justify-between items-center w-full px-10 py-4 h-24 sticky top-0 z-50 nav-blur border-b border-slate-200/50">
+            <div class="flex flex-col">
+                <h1 class="text-xl font-black text-slate-800">Manajemen Peserta</h1>
+                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Database pendaftar pelatihan</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <button onclick="openModal()" class="flex items-center gap-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-[20px] font-black text-sm shadow-xl shadow-emerald-500/30 hover:scale-105 hover:shadow-emerald-500/40 active:scale-95 transition-premium">
+                    <span class="material-symbols-outlined text-xl">person_add</span>
+                    Peserta Baru
+                </button>
+            </div>
+        </header>
+
+        <main class="p-10 max-w-[1400px] mx-auto">
+            <!-- Stats Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                <div class="bg-white p-8 rounded-[32px] premium-shadow border border-slate-50 flex items-center gap-6">
+                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center">
+                        <span class="material-symbols-outlined text-3xl">groups</span>
+                    </div>
+                    <div>
+                        <p class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Total Pendaftar</p>
+                        <p id="stat-total-pendaftar" class="text-3xl font-black text-slate-800">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Card -->
+            <section class="bg-white rounded-[40px] premium-shadow border border-slate-50 overflow-hidden">
+                <div class="p-8 border-b border-slate-50 flex flex-col md:flex-row gap-6 items-center justify-between">
+                    <div class="relative w-full md:w-96 group">
+                        <input id="search-input" class="w-full pl-12 pr-6 py-3 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-primary/20 focus:bg-white transition-premium text-sm font-semibold" placeholder="Cari nama atau email..." type="text"/>
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-slate-50/50 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] border-b border-slate-100">
+                                <th class="px-10 py-6">Profil Peserta</th>
+                                <th class="px-8 py-6">Detail Kontak</th>
+                                <th class="px-8 py-6">Program Pilihan</th>
+                                <th class="px-10 py-6 text-right">Aksi Kelola</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-50" id="pendaftar-table-body">
+                            <!-- Data dimuat di sini -->
+                            <tr>
+                                <td colspan="4" class="px-10 py-20 text-center">
+                                    <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-primary mx-auto mb-4"></div>
+                                    <p class="text-slate-400 font-bold text-sm">Menghubungkan ke database...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="pendaftar-modal" class="fixed inset-0 bg-slate-900/60 hidden items-center justify-center z-[100] backdrop-blur-md p-6">
+        <div class="bg-white rounded-[40px] w-full max-w-xl p-12 shadow-2xl transition-premium transform scale-95 opacity-0" id="modal-container">
+            <div class="flex justify-between items-start mb-10">
+                <div>
+                    <h3 id="modal-title" class="text-2xl font-black text-slate-800">Manajemen Peserta</h3>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Lengkapi informasi peserta</p>
+                </div>
+                <button onclick="closeModal()" class="w-10 h-10 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <form id="pendaftar-form" class="space-y-8">
+                <input type="hidden" id="pendaftar-id">
+                <div class="group">
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3 group-focus-within:text-primary transition-colors">Nama Lengkap</label>
+                    <input type="text" id="nama_lengkap" required class="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:outline-none focus:bg-white focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-premium text-slate-800 font-semibold" placeholder="Contoh: John Doe">
+                </div>
+                <div class="group">
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3 group-focus-within:text-primary transition-colors">Alamat Email</label>
+                    <input type="email" id="email" required class="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:outline-none focus:bg-white focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-premium text-slate-800 font-semibold" placeholder="john@example.com">
+                </div>
+                <div class="group">
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3 group-focus-within:text-primary transition-colors">Program Kejuruan</label>
+                    <select id="jurusan_id" required class="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:outline-none focus:bg-white focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-premium text-slate-800 font-bold">
+                        <!-- Opsi kejuruan dimuat di sini -->
+                    </select>
+                </div>
+                
+                <div class="flex gap-4 pt-6">
+                    <button type="button" onclick="closeModal()" class="flex-1 px-8 py-5 text-slate-500 font-black text-sm hover:bg-slate-50 rounded-2xl transition-colors">Batal</button>
+                    <button type="submit" class="flex-2 bg-primary text-white px-10 py-5 rounded-[24px] font-black text-sm shadow-xl shadow-primary/30 hover:scale-105 active:scale-95 transition-premium">
+                        Simpan Data Peserta
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/auth-check.js"></script>
+    <script>
+        const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const modal = document.getElementById('pendaftar-modal');
+        const modalContainer = document.getElementById('modal-container');
+        const form = document.getElementById('pendaftar-form');
+        let currentEditId = null;
+
+        // Security: HTML Sanitizer Helper
+        function escapeHTML(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        async function fetchPendaftar() {
+            const tbody = document.getElementById('pendaftar-table-body');
+            try {
+                const { data, error } = await client
+                    .from('pendaftar')
+                    .select('*, kejuruan(nama_kejuruan)')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+                
+                document.getElementById('stat-total-pendaftar').textContent = data ? data.length : 0;
+
+                tbody.innerHTML = '';
+
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" class="px-10 py-12 text-center">
+                        <div class="flex flex-col items-center opacity-40">
+                            <span class="material-symbols-outlined text-6xl mb-2">person_off</span>
+                            <p class="font-black text-xs uppercase tracking-widest text-slate-400">Belum ada data pendaftar</p>
+                        </div>
+                    </td></tr>`;
+                    return;
+                }
+
+                data.forEach(person => {
+                    const safeName = escapeHTML(person.nama_lengkap);
+                    const safeEmail = escapeHTML(person.email);
+                    const safeProgram = escapeHTML(person.kejuruan?.nama_kejuruan || '-');
+                    const status = (person.status || 'pending').toLowerCase();
+                    const statusStyles = {
+                        'pending': 'bg-orange-50 text-orange-600 border-orange-100',
+                        'approved': 'bg-emerald-50 text-emerald-600 border-emerald-100',
+                        'rejected': 'bg-red-50 text-red-600 border-red-100'
+                    };
+
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-slate-50/50 transition-premium group';
+                    tr.innerHTML = `
+                        <td class="px-10 py-8">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center font-black text-slate-400">
+                                    ${safeName.charAt(0)}
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-black text-slate-800 tracking-tight">${safeName}</span>
+                                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${safeEmail}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-8 py-8">
+                            <span class="text-sm font-bold text-slate-600">${safeProgram}</span>
+                        </td>
+                        <td class="px-8 py-8">
+                            <span class="px-3 py-1.5 rounded-full border text-[10px] font-black uppercase tracking-widest ${statusStyles[status] || 'bg-slate-50 text-slate-400 border-slate-100'}">
+                                ${status}
+                            </span>
+                        </td>
+                        <td class="px-10 py-8 text-right">
+                            <div class="flex justify-end gap-3 transition-premium">
+                                ${status !== 'approved' ? `
+                                    <button onclick="approvePendaftar(${person.id})" class="w-11 h-11 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-premium shadow-sm border border-emerald-100" title="Setujui Pendaftaran">
+                                        <span class="material-symbols-outlined text-xl">check_circle</span>
+                                    </button>
+                                ` : ''}
+                                ${status !== 'rejected' ? `
+                                    <button onclick="rejectPendaftar(${person.id})" class="w-11 h-11 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center hover:bg-orange-600 hover:text-white transition-premium shadow-sm border border-orange-100" title="Tolak Pendaftaran">
+                                        <span class="material-symbols-outlined text-xl">cancel</span>
+                                    </button>
+                                ` : ''}
+                                <button onclick='editPendaftar(${JSON.stringify(person).replace(/'/g, "&#39;")})' class="w-11 h-11 bg-blue-50 text-primary rounded-xl flex items-center justify-center hover:bg-primary hover:text-white transition-premium shadow-sm border border-blue-100">
+                                    <span class="material-symbols-outlined text-xl">edit</span>
+                                </button>
+                                <button onclick="deletePendaftar(${person.id})" class="w-11 h-11 bg-red-50 text-red-500 rounded-xl flex items-center justify-center hover:bg-red-500 hover:text-white transition-premium shadow-sm border border-red-100">
+                                    <span class="material-symbols-outlined text-xl">delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error('Error:', err);
+            }
+        }
+
+        window.approvePendaftar = async function(id) {
+            if (!confirm('Setujui pendaftaran peserta ini?')) return;
+            try {
+                const { error } = await client
+                    .from('pendaftar')
+                    .update({ status: 'approved' })
+                    .eq('id', id);
+                
+                if (error) throw error;
+                fetchPendaftar();
+            } catch (err) {
+                alert('Gagal menyetujui: ' + err.message);
+            }
+        }
+
+        window.rejectPendaftar = async function(id) {
+            if (!confirm('Tolak pendaftaran peserta ini?')) return;
+            try {
+                const { error } = await client
+                    .from('pendaftar')
+                    .update({ status: 'rejected' })
+                    .eq('id', id);
+                
+                if (error) throw error;
+                fetchPendaftar();
+            } catch (err) {
+                alert('Gagal menolak: ' + err.message);
+            }
+        }
+
+        async function fetchKejuruan() {
+            const select = document.getElementById('jurusan_id');
+            try {
+                const { data, error } = await client.from('kejuruan').select('id, nama_kejuruan');
+                if (error) throw error;
+                select.innerHTML = '<option value="">-- Pilih Program --</option>';
+                data.forEach(item => {
+                    select.innerHTML += `<option value="${item.id}">${item.nama_kejuruan}</option>`;
+                });
+            } catch (err) {
+                console.error('Error:', err);
+            }
+        }
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modalContainer.classList.remove('scale-95', 'opacity-0');
+                modalContainer.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            form.reset();
+            document.getElementById('pendaftar-id').value = '';
+            document.getElementById('modal-title').textContent = 'Tambah Peserta';
+            fetchKejuruan();
+        }
+
+        function closeModal() {
+            modalContainer.classList.add('scale-95', 'opacity-0');
+            modalContainer.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        window.editPendaftar = function(person) {
+            openModal();
+            document.getElementById('modal-title').textContent = 'Edit Peserta';
+            document.getElementById('pendaftar-id').value = person.id;
+            document.getElementById('nama_lengkap').value = person.nama_lengkap;
+            document.getElementById('email').value = person.email;
+            setTimeout(() => {
+                document.getElementById('jurusan_id').value = person.jurusan_id;
+            }, 500);
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('pendaftar-id').value;
+            const payload = {
+                nama_lengkap: document.getElementById('nama_lengkap').value,
+                email: document.getElementById('email').value,
+                jurusan_id: parseInt(document.getElementById('jurusan_id').value)
+            };
+
+            try {
+                if (id) {
+                    await client.from('pendaftar').update(payload).eq('id', id);
+                } else {
+                    await client.from('pendaftar').insert([payload]);
+                }
+                closeModal();
+                fetchPendaftar();
+            } catch (err) {
+                alert('Gagal menyimpan: ' + err.message);
+            }
+        });
+
+        window.deletePendaftar = async function(id) {
+            if (!confirm('Hapus data peserta ini?')) return;
+            try {
+                await client.from('pendaftar').delete().eq('id', id);
+                fetchPendaftar();
+            } catch (err) {
+                alert('Gagal menghapus: ' + err.message);
+            }
+        }
+
+        window.onload = fetchPendaftar;
+    </script>
+</body>
+</html>

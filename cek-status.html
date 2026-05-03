@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Cek status pendaftaran dan kelulusan Anda di BLK LOTENG. Masukkan ID Pendaftaran atau Email untuk melihat hasil seleksi.">
+    <meta name="keywords" content="Cek Status BLK LOTENG, Hasil Seleksi BLK, Pengumuman Pelatihan">
+    <meta name="author" content="Lalu Arif Trasna Ashari">
+
+    <!-- Security: Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.supabase.co; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self' data: https://*.supabase.co;">
+    <title>Cek Status Pendaftaran - BLK LOTENG</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            background-color: #f8f9ff;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #00355f 0%, #0f4c81 100%);
+        }
+
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col font-body-md">
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 w-full nav-blur border-b border-slate-200/50">
+        <nav class="max-w-[1200px] mx-auto px-4 md:px-8 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div
+                    class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined text-white">school</span>
+                </div>
+                <span class="text-xl font-black tracking-tight text-slate-800">Vocational<span
+                        class="text-primary">Hub</span></span>
+            </div>
+            <a href="index.html"
+                class="text-sm font-bold text-slate-500 hover:text-primary transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined text-xl">arrow_back</span>
+                Kembali
+            </a>
+        </nav>
+    </header>
+
+    <main class="flex-grow py-20 px-4">
+        <div class="max-w-[800px] mx-auto text-center">
+            <div
+                class="inline-flex items-center gap-2 bg-blue-50 px-4 py-1.5 rounded-full text-primary text-xs font-black tracking-wider uppercase mb-6 border border-blue-100">
+                Layanan Publik
+            </div>
+            <h1 class="text-4xl font-black text-slate-800 mb-4 leading-tight tracking-tight">Cek Status Pendaftaran</h1>
+            <p class="text-slate-500 mb-12">Masukkan alamat email yang Anda gunakan saat mendaftar untuk melihat status
+                terbaru Anda.</p>
+
+            <!-- Search Form -->
+            <div class="max-w-[600px] mx-auto bg-white p-8 md:p-10 rounded-[40px] premium-shadow border border-slate-100 mb-10">
+                <form id="check-form" class="space-y-6">
+                    <div class="group text-left">
+                        <label
+                            class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3 group-focus-within:text-primary transition-colors">Alamat
+                            Email Terdaftar</label>
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-slate-400">mail</span>
+                            <input type="email" id="email" required
+                                class="w-full pl-14 pr-6 py-5 bg-slate-50 border-2 border-transparent rounded-[24px] focus:outline-none focus:bg-white focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-premium text-slate-800 font-bold"
+                                placeholder="nama@email.com">
+                        </div>
+                    </div>
+                    <button type="submit" id="submit-btn"
+                        class="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-5 rounded-[24px] font-black text-sm shadow-xl shadow-blue-500/30 hover:scale-[1.02] active:scale-95 transition-premium flex items-center justify-center gap-3">
+                        <span class="material-symbols-outlined">search</span>
+                        Cari Data Pendaftaran
+                    </button>
+                </form>
+            </div>
+
+            <!-- Result Section -->
+            <div id="result-container" class="hidden animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <!-- Data will be injected here -->
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loading" class="hidden py-10">
+                <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-primary mx-auto"></div>
+                <p class="mt-4 text-slate-500 font-bold text-sm">Mencari data...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <!-- Certificate Engine Removed -->
+
+    <!-- Certificate Template Removed -->
+
+    <script>
+        const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const form = document.getElementById('check-form');
+        const resultContainer = document.getElementById('result-container');
+        const loading = document.getElementById('loading');
+
+        // Security: HTML Sanitizer Helper
+        function escapeHTML(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        let isRequesting = false;
+        let lastSearchTime = 0;
+        const COOLDOWN_MS = 3000; // 3 seconds cooldown between searches
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // DDoS Mitigation: Prevent rapid-fire searches
+            const now = Date.now();
+            if (now - lastSearchTime < COOLDOWN_MS) {
+                const waitSec = Math.ceil((COOLDOWN_MS - (now - lastSearchTime)) / 1000);
+                alert(`Mohon tunggu ${waitSec} detik lagi sebelum mencari kembali.`);
+                return;
+            }
+
+            if (isRequesting) return;
+
+            const emailInput = document.getElementById('email');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const email = emailInput.value.trim().toLowerCase();
+
+            // Basic Validation
+            if (!email || !email.includes('@')) {
+                alert('Silakan masukkan email yang valid.');
+                return;
+            }
+
+            // UI State: Loading
+            isRequesting = true;
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            resultContainer.classList.add('hidden');
+            loading.classList.remove('hidden');
+
+            try {
+                // 1. Get Participant Data
+                const { data, error } = await client
+                    .from('pendaftar')
+                    .select('*, kejuruan(nama_kejuruan, instruktur_name, instruktur_nip)')
+                    .eq('email', email)
+                    .single();
+
+                if (error && error.code !== 'PGRST116') throw error;
+
+                if (!data) {
+                    showNotFound();
+                    return;
+                }
+
+                // 2. Check if Certificate exists
+                const { data: certData } = await client
+                    .from('sertifikasi')
+                    .select('*')
+                    .eq('pendaftar_id', data.id)
+                    .single();
+
+                lastSearchTime = Date.now();
+                showResult(data, certData);
+            } catch (err) {
+                console.error('Search Error:', err);
+                showNotFound();
+            } finally {
+                isRequesting = false;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                loading.classList.add('hidden');
+            }
+        });
+
+        function showResult(data, certData) {
+            // Sanitize all data before rendering (XSS Protection)
+            const safeName = escapeHTML(data.nama_lengkap);
+            const safeProgram = escapeHTML(data.kejuruan?.nama_kejuruan || 'Program Tidak Diketahui');
+            const safeInstructor = escapeHTML(data.kejuruan?.instruktur_name || 'Lalu Arif Trasna Ashari');
+            const safeParticipantId = escapeHTML(data.id.toString().padStart(6, '0'));
+            
+            const status = data.status || 'pending';
+            const isApproved = status === 'approved';
+            const isRejected = status === 'rejected';
+
+            let statusColor = 'from-orange-500 to-amber-500';
+            let statusText = 'Dalam Proses';
+            let icon = 'pending_actions';
+            let message = 'Terima kasih telah mendaftar. Admin kami sedang memverifikasi data Anda. Mohon cek kembali dalam 1-2 hari kerja.';
+
+            if (isApproved) {
+                statusColor = 'from-emerald-500 to-teal-500';
+                statusText = 'Diterima';
+                icon = 'verified';
+                message = 'Selamat! Anda telah resmi diterima. Silakan tunggu informasi selanjutnya via email atau WhatsApp.';
+            } else if (isRejected) {
+                statusColor = 'from-red-500 to-rose-500';
+                statusText = 'Ditolak';
+                icon = 'cancel';
+                message = 'Mohon maaf, pendaftaran Anda belum bisa kami setujui saat ini.';
+            }
+
+            // Graduation Notice Logic (Premium Version)
+            let graduationNotice = '';
+            if (certData) {
+                graduationNotice = `
+                    <div class="mt-10 group relative overflow-hidden rounded-[40px] bg-[#001c37] p-8 md:p-10 text-white shadow-2xl shadow-blue-900/20">
+                        <!-- Background Decorations -->
+                        <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-500/20 blur-[80px] group-hover:bg-blue-400/30 transition-colors duration-700"></div>
+                        <div class="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-amber-500/10 blur-[80px] group-hover:bg-amber-400/20 transition-colors duration-700"></div>
+                        
+                        <!-- Floating Particles -->
+                        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+                        <div class="relative flex flex-col md:flex-row items-center gap-8">
+                            <div class="relative">
+                                <div class="w-24 h-24 bg-gradient-to-tr from-amber-400 to-yellow-600 rounded-[32px] flex items-center justify-center shadow-2xl shadow-amber-900/40 animate-bounce-slow">
+                                    <span class="material-symbols-outlined text-5xl text-white">workspace_premium</span>
+                                </div>
+                                <div class="absolute -right-2 -bottom-2 w-8 h-8 bg-white text-[#001c37] rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="material-symbols-outlined text-lg font-bold">star</span>
+                                </div>
+                            </div>
+
+                            <div class="text-center md:text-left flex-1">
+                                <div class="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest mb-4 border border-amber-500/30">
+                                    Pencapaian Tertinggi
+                                </div>
+                                <h3 class="text-3xl font-black mb-3 tracking-tight leading-tight">Selamat, Anda Telah Lulus!</h3>
+                                <p class="text-blue-100/70 text-base font-medium leading-relaxed max-w-lg">
+                                    Anda telah resmi menyelesaikan program <span class="text-amber-400 font-black">${safeProgram}</span> dengan hasil memuaskan. 
+                                    Silakan kunjungi kantor kami untuk pengambilan sertifikat fisik.
+                                </p>
+                            </div>
+
+                            <div class="flex flex-col items-center gap-3">
+                                <div class="w-12 h-12 bg-white/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/20">
+                                    <span class="material-symbols-outlined text-white">support_agent</span>
+                                </div>
+                                <p class="text-[10px] font-black text-blue-200 uppercase tracking-widest">Hubungi Panitia</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            resultContainer.innerHTML = `
+                <div class="bg-white rounded-[48px] premium-shadow border border-slate-100 relative overflow-hidden transition-all duration-700 text-left flex flex-col lg:flex-row min-h-[600px]">
+                    
+                    <!-- LEFT PANEL: Brand & Profile (Professional Dark) -->
+                    <div class="lg:w-[380px] bg-[#001c37] relative overflow-hidden flex flex-col">
+                        <!-- Decorative Background -->
+                        <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-500/20 blur-[80px]"></div>
+                        <div class="absolute -left-20 bottom-20 h-64 w-64 rounded-full bg-indigo-500/10 blur-[80px]"></div>
+                        
+                        <div class="relative p-10 lg:p-12 flex-1 flex flex-col items-center lg:items-start">
+                            <!-- Status Badge Floating -->
+                            <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-2xl border border-white/10 mb-12 self-center lg:self-start">
+                                <div class="w-2.5 h-2.5 rounded-full bg-gradient-to-r ${statusColor} animate-pulse shadow-[0_0_12px_rgba(255,255,255,0.5)]"></div>
+                                <span class="text-[10px] font-black text-white/90 uppercase tracking-[0.2em]">${statusText}</span>
+                            </div>
+
+                            <!-- Profile Section -->
+                            <div class="relative mb-8">
+                                <div class="w-40 h-40 bg-gradient-to-br from-white/10 to-white/5 rounded-[56px] p-1.5 backdrop-blur-xl border border-white/10 shadow-2xl">
+                                    <div class="w-full h-full bg-[#001c37] rounded-[48px] flex items-center justify-center overflow-hidden border border-white/5">
+                                        <span class="material-symbols-outlined text-8xl text-white/10">account_circle</span>
+                                    </div>
+                                </div>
+                                <div class="absolute -right-2 -bottom-2 w-12 h-12 rounded-2xl bg-gradient-to-br ${statusColor} flex items-center justify-center text-white shadow-xl border-4 border-[#001c37]">
+                                    <span class="material-symbols-outlined text-xl">${icon}</span>
+                                </div>
+                            </div>
+
+                            <div class="text-center lg:text-left mb-12">
+                                <h2 class="text-3xl font-black text-white tracking-tight leading-tight mb-2">${safeName}</h2>
+                                <p class="text-blue-300/50 font-bold uppercase tracking-[0.3em] text-[10px]">ID: #${safeParticipantId}</p>
+                            </div>
+
+                            <!-- Quick Stats -->
+                            <div class="w-full space-y-4 mt-auto">
+                                <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5">
+                                    <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-blue-300">
+                                        <span class="material-symbols-outlined text-xl">event_available</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] font-black text-white/30 uppercase tracking-widest">Terdaftar Pada</p>
+                                        <p class="text-xs font-bold text-white/80">${new Date(data.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Brand -->
+                        <div class="p-10 border-t border-white/5 bg-white/[0.02] flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 bg-blue-500 rounded-md flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-white text-xs">school</span>
+                                </div>
+                                <span class="text-[10px] font-black text-white tracking-tighter uppercase">BLK <span class="text-blue-400">LOTENG</span></span>
+                            </div>
+                            <span class="text-[8px] font-bold text-white/20 tracking-widest uppercase italic">Official Status</span>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT PANEL: Main Content (Clean & Spacious) -->
+                    <div class="flex-1 bg-white p-8 lg:p-16 flex flex-col">
+                        <div class="mb-12 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-1 h-8 bg-blue-600 rounded-full"></div>
+                                <div>
+                                    <h3 class="text-xl font-black text-slate-800 tracking-tight">Detail Program</h3>
+                                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Informasi Akademik & Pelatihan</p>
+                                </div>
+                            </div>
+                            <div class="hidden sm:flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-xl border border-slate-100">
+                                <span class="material-symbols-outlined text-sm text-slate-400">lock</span>
+                                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Secured Data</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                            <!-- Program Card -->
+                            <div class="p-8 rounded-[40px] bg-slate-50 border-2 border-transparent hover:border-blue-100 hover:bg-white transition-all duration-300">
+                                <div class="w-12 h-12 rounded-2xl bg-blue-600/10 text-blue-600 flex items-center justify-center mb-6">
+                                    <span class="material-symbols-outlined">school</span>
+                                </div>
+                                <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Program Dipilih</h4>
+                                <p class="text-xl font-black text-slate-800 leading-tight">${safeProgram}</p>
+                            </div>
+
+                            <!-- Instructor Card -->
+                            <div class="p-8 rounded-[40px] bg-slate-50 border-2 border-transparent hover:border-indigo-100 hover:bg-white transition-all duration-300">
+                                <div class="w-12 h-12 rounded-2xl bg-indigo-600/10 text-indigo-600 flex items-center justify-center mb-6">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Instruktur</h4>
+                                <p class="text-xl font-black text-slate-800 leading-tight">${safeInstructor}</p>
+                            </div>
+                        </div>
+
+                        ${graduationNotice}
+
+                        <!-- System Message -->
+                        <div class="mt-auto pt-10">
+                            <div class="p-8 rounded-[40px] bg-gradient-to-r from-slate-50 to-white border border-slate-100 flex items-start gap-6 relative group">
+                                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-slate-400 shadow-sm shrink-0 border border-slate-100 group-hover:text-blue-500 transition-colors">
+                                    <span class="material-symbols-outlined text-xl">info</span>
+                                </div>
+                                <div>
+                                    <h5 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Pesan Administrator</h5>
+                                    <p class="text-sm text-slate-600 font-bold leading-relaxed italic">
+                                        "${escapeHTML(message)}"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            resultContainer.classList.remove('hidden');
+        }
+
+        // downloadCert function removed
+
+        function showNotFound() {
+            resultContainer.innerHTML = `
+                <div class="bg-red-50 p-10 rounded-[40px] border border-red-100 text-center">
+                    <div class="w-16 h-16 bg-white text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                        <span class="material-symbols-outlined text-3xl">search_off</span>
+                    </div>
+                    <h4 class="text-lg font-black text-red-700 mb-2">Data Tidak Ditemukan</h4>
+                    <p class="text-red-600/70 text-sm font-medium">Email yang Anda masukkan belum terdaftar dalam sistem kami.</p>
+                </div>
+            `;
+            resultContainer.classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Daftar sekarang di BLK LOTENG. Pilih program pelatihan kejuruan favorit Anda dan mulai perjalanan karir profesional hari ini.">
+    <meta name="keywords" content="Pendaftaran BLK LOTENG, Daftar Pelatihan, Kursus Gratis Lombok, Sertifikasi Vokasi">
+    <meta name="author" content="Lalu Arif Trasna Ashari">
+    
+    <!-- Security: Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.supabase.co; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self' data: https://*.supabase.co https://images.unsplash.com;">
+    <title>Pendaftaran Pelatihan - BLK LOTENG</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { background-color: #f8f9ff; color: #0d1c2f; font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- TopNavBar -->
+    <header class="sticky top-0 z-50 w-full nav-blur border-b border-slate-200/50">
+        <nav class="max-w-[1200px] mx-auto px-4 md:px-8 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined text-white">school</span>
+                </div>
+                <span class="text-xl font-black tracking-tight text-slate-800">BLK<span class="text-primary"> LOTENG</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-6">
+                <a class="text-sm font-bold text-slate-500 hover:text-primary flex items-center gap-2 transition-premium" href="index.html">
+                    <span class="material-symbols-outlined text-lg">arrow_back</span>
+                    Kembali Beranda
+                </a>
+            </div>
+            <a href="admin/index.html" class="bg-primary/10 text-primary px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-primary hover:text-white transition-premium">
+                Admin Portal
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center py-12 px-4">
+        <div class="max-w-[800px] w-full">
+            <!-- Registration Header -->
+            <div class="mb-12 text-center">
+                <div class="inline-flex items-center gap-2 bg-blue-50 px-4 py-1.5 rounded-full text-primary text-xs font-black uppercase tracking-widest mb-4">
+                    <span class="material-symbols-outlined text-sm">edit_note</span>
+                    Langkah Terakhir
+                </div>
+                <h1 class="text-3xl md:text-4xl font-black text-slate-800 mb-4 tracking-tight">Formulir Pendaftaran</h1>
+                <p class="text-slate-500 max-w-md mx-auto leading-relaxed">Silakan lengkapi informasi di bawah ini untuk mengamankan kursi Anda di program pelatihan pilihan.</p>
+            </div>
+            
+            <!-- Progress Stepper -->
+            <div class="flex justify-between items-center mb-12 max-w-[450px] mx-auto relative px-4">
+                <div class="flex flex-col items-center gap-3 z-10">
+                    <div class="w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/30 ring-4 ring-white">
+                        <span class="material-symbols-outlined text-xl">check</span>
+                    </div>
+                    <span class="text-[10px] font-black text-primary uppercase tracking-widest">Program</span>
+                </div>
+                <div class="h-1 bg-primary/20 flex-grow -mx-2 absolute top-6 left-0 right-0">
+                    <div class="h-full bg-primary w-1/2"></div>
+                </div>
+                <div class="flex flex-col items-center gap-3 z-10">
+                    <div class="w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/30 ring-4 ring-white font-black">2</div>
+                    <span class="text-[10px] font-black text-primary uppercase tracking-widest">Data Diri</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 z-10">
+                    <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center ring-4 ring-white font-black">3</div>
+                    <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Selesai</span>
+                </div>
+            </div>
+
+            <!-- Form Card -->
+            <div class="bg-white rounded-[40px] premium-shadow overflow-hidden flex flex-col md:flex-row border border-slate-50">
+                <!-- Side Info -->
+                <div class="hidden md:block w-[320px] bg-slate-900 relative">
+                    <div class="absolute inset-0 opacity-40">
+                        <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800"/>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-primary/80 to-slate-900"></div>
+                    <div class="relative z-10 p-12 h-full flex flex-col justify-end">
+                        <div class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-white">lightbulb</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-white mb-4 leading-tight">Mulai Karirmu<br>Di Sini.</h3>
+                        <p class="text-sm text-white/60 leading-relaxed">Data Anda aman bersama kami dan hanya digunakan untuk keperluan administrasi pelatihan.</p>
+                    </div>
+                </div>
+                
+                <!-- Form Section -->
+                <div class="flex-grow p-10 md:p-16">
+                    <div class="hidden mb-8 p-4 rounded-2xl" id="alert-container"></div>
+                    <form class="space-y-8" id="registration-form">
+                        <div class="space-y-6">
+                            <div class="group">
+                                <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3 group-focus-within:text-primary transition-colors" for="nama_lengkap">Nama Lengkap</label>
+                                <input class="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:outline-none focus:bg-white focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-premium text-slate-800 font-semibold" id="nama_lengkap" name="nama_lengkap" placeholder="John Doe" required="" type="text"/>
+                            </div>
+                            <div class="group">
+                                <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3 group-focus-within:text-primary transition-colors" for="email">Alamat Email</label>
+                                <input class="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:outline-none focus:bg-white focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-premium text-slate-800 font-semibold" id="email" name="email" placeholder="john@example.com" required="" type="email"/>
+                            </div>
+                            <div class="group opacity-80">
+                                <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3" for="jurusan_id">Pilihan Program</label>
+                                <div class="relative">
+                                    <select class="w-full px-6 py-4 bg-slate-100 border-2 border-transparent rounded-2xl text-slate-500 appearance-none cursor-not-allowed font-bold" disabled="" id="jurusan_id" name="jurusan_id">
+                                        <option value="">Memuat data...</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+                                        <span class="material-symbols-outlined text-slate-400">lock</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <button class="w-full bg-primary text-white py-5 rounded-[24px] font-black text-sm shadow-xl shadow-primary/30 hover:scale-[1.02] active:scale-95 transition-premium flex items-center justify-center gap-3" id="submit-btn" type="submit">
+                                <span id="btn-text">Kirim Pendaftaran</span>
+                                <span class="material-symbols-outlined text-xl" id="btn-icon">arrow_forward</span>
+                                <div class="hidden animate-spin rounded-full h-5 w-5 border-2 border-white/30 border-t-white" id="btn-loader"></div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+        <div class="w-full py-12 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center max-w-[1200px] mx-auto gap-4">
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <div class="text-lg font-black text-slate-800 dark:text-slate-200">BLK LOTENG</div>
+                <p class="font-inter text-xs text-slate-500">© 2024 BLK LOTENG Portal. Seluruh Hak Cipta Dilindungi.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a class="font-inter text-xs text-slate-500 hover:text-blue-600 hover:underline transition-all" href="#">Tentang Kami</a>
+                <a class="font-inter text-xs text-slate-500 hover:text-blue-600 hover:underline transition-all" href="#">Kontak</a>
+                <a class="font-inter text-xs text-slate-500 hover:text-blue-600 hover:underline transition-all" href="#">Syarat &amp; Ketentuan</a>
+                <a class="font-inter text-xs text-slate-500 hover:text-blue-600 hover:underline transition-all" href="#">Kebijakan Privasi</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Supabase initialized via config.js
+        const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const form = document.getElementById('registration-form');
+        const alertContainer = document.getElementById('alert-container');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnLoader = document.getElementById('btn-loader');
+        const jurusanSelect = document.getElementById('jurusan_id');
+
+        // Security: HTML Sanitizer Helper
+        function escapeHTML(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        let isRequesting = false;
+        let lastSubmitTime = 0;
+        const COOLDOWN_MS = 10000; // 10 seconds cooldown between submissions
+
+        async function initForm() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const jurusanId = urlParams.get('jurusan_id');
+
+            try {
+                const { data: listJurusan, error: listError } = await client
+                    .from('kejuruan')
+                    .select('id, nama_kejuruan, kuota_total');
+
+                if (listError) throw listError;
+
+                jurusanSelect.innerHTML = '';
+                listJurusan.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id;
+                    option.textContent = item.nama_kejuruan;
+                    if (item.id == jurusanId) option.selected = true;
+                    jurusanSelect.appendChild(option);
+                });
+
+                if (!jurusanId) {
+                    showAlert('ID Jurusan tidak valid. Silakan kembali ke daftar pelatihan.', 'error');
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            } catch (err) {
+                console.error('Error fetching data:', err);
+                mockData(jurusanId);
+            }
+        }
+
+        function mockData(jurusanId) {
+            const mockJurusan = [
+                { id: 1, nama_kejuruan: 'Teknik Informatika & Jaringan' },
+                { id: 2, nama_kejuruan: 'Manajemen Perhotelan' },
+                { id: 3, nama_kejuruan: 'Desain Komunikasi Visual' }
+            ];
+            jurusanSelect.innerHTML = '';
+            mockJurusan.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = item.nama_kejuruan;
+                if (item.id == jurusanId) option.selected = true;
+                jurusanSelect.appendChild(option);
+            });
+        }
+
+        function showAlert(message, type) {
+            alertContainer.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'bg-blue-50', 'text-blue-700');
+            if (type === 'error') {
+                alertContainer.classList.add('bg-red-50', 'text-red-700', 'border', 'border-red-100');
+            } else {
+                alertContainer.classList.add('bg-blue-50', 'text-blue-700', 'border', 'border-blue-100');
+            }
+            alertContainer.textContent = message; // textContent is safe
+            alertContainer.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // DDoS Mitigation: Rate Limiting
+            const now = Date.now();
+            if (now - lastSubmitTime < COOLDOWN_MS) {
+                const waitSec = Math.ceil((COOLDOWN_MS - (now - lastSubmitTime)) / 1000);
+                showAlert(`Mohon tunggu ${waitSec} detik lagi sebelum mencoba kembali.`, 'error');
+                return;
+            }
+
+            if (isRequesting) return;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const jurusanId = urlParams.get('jurusan_id');
+            const nama = document.getElementById('nama_lengkap').value.trim();
+            const email = document.getElementById('email').value.trim().toLowerCase();
+
+            if (!jurusanId) {
+                showAlert('Jurusan tidak terpilih. Silakan kembali ke beranda.', 'error');
+                return;
+            }
+
+            // UI State: Loading
+            isRequesting = true;
+            submitBtn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoader.classList.remove('hidden');
+            alertContainer.classList.add('hidden');
+
+            try {
+                // Insert into pendaftar table
+                const { error } = await client
+                    .from('pendaftar')
+                    .insert([
+                        { 
+                            nama_lengkap: nama, 
+                            email: email, 
+                            jurusan_id: parseInt(jurusanId) 
+                        }
+                    ]);
+
+                if (error) {
+                    if (error.code === '23505') {
+                        throw new Error('Email ini sudah terdaftar untuk pelatihan.');
+                    }
+                    throw error;
+                }
+
+                lastSubmitTime = Date.now();
+                // Success redirect
+                window.location.href = `konfirmasi.html?nama=${encodeURIComponent(nama)}&email=${encodeURIComponent(email)}&jurusan_id=${jurusanId}`;
+            } catch (err) {
+                console.error('Error submitting form:', err);
+                showAlert('Gagal mendaftar: ' + err.message, 'error');
+                stopLoading();
+            }
+        });
+
+        function stopLoading() {
+            submitBtn.disabled = false;
+            btnText.classList.remove('hidden');
+            btnLoader.classList.add('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', initForm);
+    </script>
+</body>
+</html>

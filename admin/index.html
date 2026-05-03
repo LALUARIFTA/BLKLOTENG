@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Dashboard Admin - BLK LOTENG</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { background-color: #f8f9ff; }
+    </style>
+</head>
+<body class="font-body-md text-on-background">
+    <!-- SideNavBar -->
+    <aside class="hidden lg:flex flex-col h-screen fixed left-0 top-0 w-72 z-40 bg-[#001c37] text-white/70 shadow-2xl transition-premium">
+        <div class="p-8 mb-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <span class="material-symbols-outlined text-white">admin_panel_settings</span>
+                </div>
+                <div>
+                    <h2 class="text-lg font-black tracking-tighter text-white">BLK<span class="text-blue-400">LOTENG</span></h2>
+                    <p class="text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold">V1.2 Premium</p>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="flex-1 px-4 space-y-2">
+            <a class="flex items-center gap-3 px-6 py-4 text-white bg-white/10 rounded-2xl font-bold transition-premium" href="index.html">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="text-sm">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium" href="program.html">
+                <span class="material-symbols-outlined">school</span>
+                <span class="text-sm">Program Pelatihan</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium" href="pendaftar.html">
+                <span class="material-symbols-outlined">group</span>
+                <span class="text-sm">Manajemen Peserta</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium" href="instruktur.html">
+                <span class="material-symbols-outlined">record_voice_over</span>
+                <span class="text-sm">Instruktur</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium" href="sertifikasi.html">
+                <span class="material-symbols-outlined">verified</span>
+                <span class="text-sm">Sertifikasi</span>
+            </a>
+        </nav>
+
+        <div class="p-6 border-t border-white/5 mt-auto">
+            <a class="flex items-center gap-3 px-6 py-4 text-red-400 hover:bg-red-500/10 rounded-2xl font-bold transition-premium" href="../index.html">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="text-sm">Keluar Sesi</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="lg:ml-72 min-h-screen">
+        <header class="flex justify-between items-center w-full px-10 py-4 h-24 sticky top-0 z-50 nav-blur border-b border-slate-200/50">
+            <div class="flex flex-col">
+                <h1 class="text-xl font-black text-slate-800">Ringkasan Dashboard</h1>
+                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Pantau performa pelatihan Anda</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="flex flex-col items-end">
+                    <span class="text-sm font-black text-slate-800">Admin Utama</span>
+                    <span class="text-[10px] text-emerald-500 font-black uppercase tracking-widest flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                        Online
+                    </span>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-blue-400 p-0.5 shadow-lg shadow-blue-500/20">
+                    <img alt="Admin" class="w-full h-full rounded-[14px] object-cover border-2 border-white" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100"/>
+                </div>
+            </div>
+        </header>
+
+        <main class="p-10 max-w-[1400px] mx-auto">
+            <!-- Stats Cards (Upgraded for more detail) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-10">
+                <div class="bg-white p-6 rounded-[32px] premium-shadow border border-slate-50 flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-2xl">groups</span>
+                    </div>
+                    <h3 class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1">Total Peserta</h3>
+                    <p id="stat-pendaftar" class="text-2xl font-black text-slate-800">0</p>
+                </div>
+                <div class="bg-white p-6 rounded-[32px] premium-shadow border border-slate-50 flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-2xl">pending_actions</span>
+                    </div>
+                    <h3 class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1">Menunggu</h3>
+                    <p id="stat-pending" class="text-2xl font-black text-orange-600">0</p>
+                </div>
+                <div class="bg-white p-6 rounded-[32px] premium-shadow border border-slate-50 flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-2xl">verified</span>
+                    </div>
+                    <h3 class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1">Diterima</h3>
+                    <p id="stat-approved" class="text-2xl font-black text-emerald-600">0</p>
+                </div>
+                <div class="bg-white p-6 rounded-[32px] premium-shadow border border-slate-50 flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-2xl">school</span>
+                    </div>
+                    <h3 class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1">Program</h3>
+                    <p id="stat-program" class="text-2xl font-black text-slate-800">0</p>
+                </div>
+                <div class="bg-white p-6 rounded-[32px] premium-shadow border border-slate-50 flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-slate-50 text-slate-600 rounded-xl flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-2xl">record_voice_over</span>
+                    </div>
+                    <h3 class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1">Instruktur</h3>
+                    <p id="stat-instruktur" class="text-2xl font-black text-slate-800">0</p>
+                </div>
+                <div class="bg-white p-6 rounded-[32px] premium-shadow border border-slate-50 flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-2xl">workspace_premium</span>
+                    </div>
+                    <h3 class="text-slate-400 font-bold text-[10px] uppercase tracking-widest mb-1">Sertifikat</h3>
+                    <p id="stat-sertifikat" class="text-2xl font-black text-violet-600">0</p>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
+                <!-- Trend Chart -->
+                <div class="bg-white p-10 rounded-[40px] premium-shadow border border-slate-50">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h3 class="text-lg font-black text-slate-800 tracking-tight">Tren Pendaftaran</h3>
+                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">7 Hari Terakhir</p>
+                        </div>
+                        <div class="w-10 h-10 bg-blue-50 text-primary rounded-xl flex items-center justify-center">
+                            <span class="material-symbols-outlined">trending_up</span>
+                        </div>
+                    </div>
+                    <div class="h-[300px] w-full">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Popularity Chart -->
+                <div class="bg-white p-10 rounded-[40px] premium-shadow border border-slate-50">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h3 class="text-lg font-black text-slate-800 tracking-tight">Program Terpopuler</h3>
+                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Distribusi Peserta</p>
+                        </div>
+                        <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                            <span class="material-symbols-outlined">pie_chart</span>
+                        </div>
+                    </div>
+                    <div class="h-[300px] w-full flex items-center justify-center">
+                        <canvas id="programChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Registrations Table -->
+            <section class="bg-white rounded-[40px] premium-shadow border border-slate-50 overflow-hidden mb-12">
+                <div class="p-10 border-b border-slate-50 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-black text-slate-800 tracking-tight">Pendaftaran Terbaru</h3>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">5 Peserta terakhir yang bergabung</p>
+                    </div>
+                    <a href="pendaftar.html" class="flex items-center gap-2 bg-slate-50 text-primary px-6 py-3 rounded-2xl font-black text-xs hover:bg-primary hover:text-white transition-premium">
+                        Lihat Semua
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-slate-50/50 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] border-b border-slate-100">
+                                <th class="px-10 py-6">Nama Peserta</th>
+                                <th class="px-8 py-6">Program Pelatihan</th>
+                                <th class="px-8 py-6">Waktu Daftar</th>
+                                <th class="px-10 py-6 text-right">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-50" id="recent-pendaftar-body">
+                            <!-- Data dimuat via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/auth-check.js"></script>
+    <script>
+        const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        let trendChart, programChart;
+
+        // Security: HTML Sanitizer Helper
+        function escapeHTML(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        async function updateDashboard() {
+            try {
+                // Fetch Counts
+                const [pendaftar, pending, approved, kejuruan, instruktur, sertifikat] = await Promise.all([
+                    client.from('pendaftar').select('id', { count: 'exact', head: true }),
+                    client.from('pendaftar').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+                    client.from('pendaftar').select('id', { count: 'exact', head: true }).eq('status', 'approved'),
+                    client.from('kejuruan').select('id', { count: 'exact', head: true }),
+                    client.from('instruktur').select('id', { count: 'exact', head: true }),
+                    client.from('sertifikasi').select('id', { count: 'exact', head: true })
+                ]);
+
+                document.getElementById('stat-pendaftar').textContent = pendaftar.count || 0;
+                document.getElementById('stat-pending').textContent = pending.count || 0;
+                document.getElementById('stat-approved').textContent = approved.count || 0;
+                document.getElementById('stat-program').textContent = kejuruan.count || 0;
+                document.getElementById('stat-instruktur').textContent = instruktur.count || 0;
+                document.getElementById('stat-sertifikat').textContent = sertifikat.count || 0;
+
+                // Update Charts
+                await Promise.all([updateTrendChart(), updateProgramChart(), updateRecentTable()]);
+
+            } catch (err) {
+                console.error('Update failed:', err);
+            }
+        }
+
+        async function updateRecentTable() {
+            const tbody = document.getElementById('recent-pendaftar-body');
+            try {
+                const { data, error } = await client
+                    .from('pendaftar')
+                    .select('*, kejuruan(nama_kejuruan)')
+                    .order('created_at', { ascending: false })
+                    .limit(5);
+
+                if (error) throw error;
+
+                tbody.innerHTML = '';
+                data.forEach(person => {
+                    const safeName = escapeHTML(person.nama_lengkap);
+                    const safeProgram = escapeHTML(person.kejuruan?.nama_kejuruan || 'Program Pelatihan');
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-slate-50/50 transition-premium';
+                    tr.innerHTML = `
+                        <td class="px-10 py-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center font-black text-slate-400 text-xs">
+                                    ${safeName.charAt(0)}
+                                </div>
+                                <span class="font-black text-slate-800 tracking-tight">${safeName}</span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-6">
+                            <span class="text-sm font-bold text-slate-600">${safeProgram}</span>
+                        </td>
+                        <td class="px-8 py-6">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">${new Date(person.created_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })} WIB</span>
+                        </td>
+                        <td class="px-10 py-6 text-right">
+                            <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                                Baru
+                            </span>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error('Recent table error:', err);
+            }
+        }
+
+        async function updateTrendChart() {
+            const days = 7;
+            const labels = [];
+            const dataCounts = [];
+            
+            for (let i = days - 1; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                labels.push(date.toLocaleDateString('id-ID', { weekday: 'short' }));
+                
+                const { count } = await client
+                    .from('pendaftar')
+                    .select('id', { count: 'exact', head: true })
+                    .gte('created_at', `${dateStr}T00:00:00`)
+                    .lte('created_at', `${dateStr}T23:59:59`);
+                
+                dataCounts.push(count || 0);
+            }
+
+            const ctx = document.getElementById('trendChart').getContext('2d');
+            if (trendChart) trendChart.destroy();
+            
+            trendChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Pendaftar',
+                        data: dataCounts,
+                        borderColor: '#2d6197',
+                        backgroundColor: 'rgba(45, 97, 151, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 4,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#2d6197',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { display: false }, ticks: { font: { weight: 'bold' } } },
+                        x: { grid: { display: false }, ticks: { font: { weight: 'bold' } } }
+                    }
+                }
+            });
+        }
+
+        async function updateProgramChart() {
+            const { data: programs } = await client.from('kejuruan').select('id, nama_kejuruan');
+            const { data: registrations } = await client.from('pendaftar').select('jurusan_id');
+
+            const counts = programs.map(p => {
+                return registrations.filter(r => r.jurusan_id === p.id).length;
+            });
+
+            const ctx = document.getElementById('programChart').getContext('2d');
+            if (programChart) programChart.destroy();
+
+            programChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: programs.map(p => p.nama_kejuruan),
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: [
+                            '#2d6197', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 20
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { padding: 20, font: { weight: 'bold', size: 11 }, usePointStyle: true }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initRealtime() {
+            client
+                .channel('schema-db-changes')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'pendaftar' }, () => {
+                    updateDashboard();
+                })
+                .subscribe();
+        }
+
+        window.onload = () => {
+            updateDashboard();
+            initRealtime();
+        };
+    </script>
+</body>
+</html>

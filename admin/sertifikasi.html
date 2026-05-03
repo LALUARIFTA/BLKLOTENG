@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <!-- Security: Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.supabase.co; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self' data: https://*.supabase.co;">
+    <title>Sertifikasi - BLK LOTENG</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            background-color: #f8f9ff;
+        }
+    </style>
+</head>
+
+<body class="font-body-md text-on-background">
+    <!-- SideNavBar -->
+    <aside
+        class="hidden lg:flex flex-col h-screen fixed left-0 top-0 w-72 z-40 bg-[#001c37] text-white/70 shadow-2xl transition-premium">
+        <div class="p-8 mb-4">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <span class="material-symbols-outlined text-white">admin_panel_settings</span>
+                </div>
+                <div>
+                    <h2 class="text-lg font-black tracking-tighter text-white">ADMIN<span
+                            class="text-blue-400">HUB</span></h2>
+                    <p class="text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold">V1.2 Premium</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-2">
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium"
+                href="index.html">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="text-sm">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium"
+                href="program.html">
+                <span class="material-symbols-outlined">school</span>
+                <span class="text-sm">Program Pelatihan</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium"
+                href="pendaftar.html">
+                <span class="material-symbols-outlined">group</span>
+                <span class="text-sm">Manajemen Peserta</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-white/5 hover:text-white rounded-2xl font-semibold transition-premium"
+                href="instruktur.html">
+                <span class="material-symbols-outlined">record_voice_over</span>
+                <span class="text-sm">Instruktur</span>
+            </a>
+            <a class="flex items-center gap-3 px-6 py-4 text-white bg-white/10 rounded-2xl font-bold transition-premium"
+                href="sertifikasi.html">
+                <span class="material-symbols-outlined">verified</span>
+                <span class="text-sm">Sertifikasi</span>
+            </a>
+        </nav>
+
+        <div class="p-6 border-t border-white/5 mt-auto">
+            <a class="flex items-center gap-3 px-6 py-4 text-red-400 hover:bg-red-500/10 rounded-2xl font-bold transition-premium"
+                href="../index.html">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="text-sm">Keluar Sesi</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="lg:ml-72 min-h-screen">
+        <header
+            class="flex justify-between items-center w-full px-10 py-4 h-24 sticky top-0 z-50 nav-blur border-b border-slate-200/50">
+            <div class="flex flex-col">
+                <h1 class="text-xl font-black text-slate-800">Manajemen Sertifikasi</h1>
+                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Penerbitan Bukti Kelulusan</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="exportToExcel()"
+                    class="flex items-center gap-3 bg-emerald-50 text-emerald-600 px-6 py-4 rounded-[20px] font-black text-sm border border-emerald-100 hover:bg-emerald-600 hover:text-white hover:scale-105 active:scale-95 transition-premium shadow-sm">
+                    <span class="material-symbols-outlined text-xl">description</span>
+                    Ekspor Excel
+                </button>
+                <button onclick="openModal()"
+                    class="flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-violet-700 text-white px-8 py-4 rounded-[20px] font-black text-sm shadow-xl shadow-indigo-600/30 hover:scale-105 hover:shadow-indigo-600/40 active:scale-95 transition-premium">
+                    <span class="material-symbols-outlined text-xl">workspace_premium</span>
+                    Terbitkan Sertifikat
+                </button>
+            </div>
+        </header>
+
+        <main class="p-10 max-w-[1400px] mx-auto">
+            <!-- Table Card -->
+            <section class="bg-white rounded-[40px] premium-shadow border border-slate-50 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr
+                                class="bg-slate-50/50 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] border-b border-slate-100">
+                                <th class="px-10 py-6">ID & Nomor Seri</th>
+                                <th class="px-8 py-6">Peserta Penerima</th>
+                                <th class="px-8 py-6">Program Vokasi</th>
+                                <th class="px-10 py-6 text-right">Aksi Kelola</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-50" id="sertifikat-table-body">
+                            <!-- Data dimuat di sini -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="sertifikat-modal"
+        class="fixed inset-0 bg-slate-900/60 hidden items-center justify-center z-[100] backdrop-blur-md p-6">
+        <div class="bg-white rounded-[40px] w-full max-w-xl p-12 shadow-2xl transition-premium transform scale-95 opacity-0"
+            id="modal-container">
+            <div class="flex justify-between items-start mb-10">
+                <div>
+                    <h3 id="modal-title" class="text-2xl font-black text-slate-800">Terbitkan Sertifikat</h3>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Berikan penghargaan
+                        peserta lulus</p>
+                </div>
+                <button onclick="closeModal()"
+                    class="w-10 h-10 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <form id="sertifikat-form" class="space-y-8">
+                <div class="group">
+                    <label
+                        class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3 group-focus-within:text-primary transition-colors">Pilih
+                        Peserta Lulus</label>
+                    <select id="pendaftar_id" required
+                        class="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:outline-none focus:bg-white focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-premium text-slate-800 font-bold">
+                        <!-- List pendaftar dimuat di sini -->
+                    </select>
+                </div>
+                <div class="group">
+                    <label
+                        class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3 group-focus-within:text-primary transition-colors">Nomor
+                        Sertifikat (Generated)</label>
+                    <input type="text" id="nomor_sertifikat" readonly
+                        class="w-full px-6 py-4 bg-slate-100 border-2 border-transparent rounded-2xl text-slate-400 font-mono font-bold"
+                        placeholder="CERT-XXXX-XXXX">
+                </div>
+
+                <div class="flex gap-4 pt-6">
+                    <button type="button" onclick="closeModal()"
+                        class="flex-1 px-8 py-5 text-slate-500 font-black text-sm hover:bg-slate-50 rounded-2xl transition-colors">Batal</button>
+                    <button type="submit"
+                        class="flex-2 bg-indigo-600 text-white px-10 py-5 rounded-[24px] font-black text-sm shadow-xl shadow-indigo-600/30 hover:scale-105 active:scale-95 transition-premium">
+                        Konfirmasi Penerbitan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/auth-check.js"></script>
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Excel Export Library (SheetJS) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <!-- Hidden Certificate Template -->
+    <div id="certificate-template" class="hidden">
+        <div
+            style="width: 1050px; height: 740px; padding: 40px; background: white; position: relative; font-family: 'Inter', sans-serif; color: #1e293b; box-sizing: border-box; overflow: hidden; border: 15px solid #f8fafc;">
+            <!-- Background Watermark Pattern -->
+            <div
+                style="position: absolute; inset: 0; opacity: 0.04; pointer-events: none; background-image: radial-gradient(#00355f 2px, transparent 2px); background-size: 40px 40px;">
+            </div>
+
+            <!-- Inner Border Decor -->
+            <div style="position: absolute; inset: 20px; border: 2px solid #e2e8f0; pointer-events: none;"></div>
+            
+            <!-- Main Content Area -->
+            <div
+                style="height: 100%; width: 100%; box-sizing: border-box; padding: 20px 40px; text-align: center; position: relative; background: transparent; display: flex; flex-direction: column; justify-content: space-between;">
+
+                <!-- Header Section -->
+                <div>
+                    <div style="margin-bottom: 15px;">
+                        <div style="font-size: 32px; font-weight: 900; color: #001c37; letter-spacing: -1.5px;">
+                            VOCATIONAL<span style="color: #3b82f6;">HUB</span></div>
+                        <div
+                            style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; color: #94a3b8; margin-top: 3px;">
+                            Center of Industrial Excellence & Vocational Training</div>
+                    </div>
+
+                    <div
+                        style="font-size: 48px; font-weight: 900; margin: 10px 0; color: #001c37; text-transform: uppercase; letter-spacing: 6px;">
+                        SERTIFIKAT</div>
+                    <div
+                        style="font-size: 14px; font-weight: 700; color: #64748b; margin-bottom: 20px; letter-spacing: 2px;">
+                        NOMOR: <span id="cert-no" style="color: #001c37;">-</span></div>
+                </div>
+
+                <!-- Recipient Section -->
+                <div>
+                    <div style="font-size: 14px; font-weight: 600; color: #64748b; margin-bottom: 10px;">DIBERIKAN KEPADA:</div>
+                    <div style="max-width: 850px; margin: 0 auto;">
+                        <div id="cert-name"
+                            style="font-size: 42px; font-weight: 900; color: #001c37; border-bottom: 3px solid #3b82f6; display: inline-block; padding: 0 30px 5px 30px; line-height: 1.2; overflow-wrap: break-word; font-style: italic;">
+                            -</div>
+                    </div>
+                </div>
+
+                <!-- Description Section -->
+                <div>
+                    <div
+                        style="font-size: 16px; color: #64748b; line-height: 1.6; max-width: 750px; margin: 0 auto 10px auto;">
+                        Telah menyelesaikan dengan predikat sangat baik seluruh rangkaian program pelatihan intensif yang
+                        diselenggarakan oleh BLK LOTENG pada bidang keahlian:
+                    </div>
+
+                    <div style="max-width: 800px; margin: 0 auto 15px auto;">
+                        <div id="cert-program"
+                            style="font-size: 24px; font-weight: 800; color: #3b82f6; line-height: 1.3; text-transform: uppercase;">
+                            -</div>
+                    </div>
+
+                    <div style="font-size: 13px; color: #94a3b8; max-width: 700px; margin: 0 auto;">
+                        Sertifikat ini diterbitkan sebagai pengakuan atas dedikasi, kompetensi, dan keahlian yang telah
+                        dikuasai selama masa pelatihan.
+                    </div>
+                </div>
+
+                <!-- Footer Signatures -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 20px; padding-bottom: 10px;">
+                    <div style="text-align: center; width: 280px;">
+                        <div style="font-size: 12px; color: #64748b; margin-bottom: 50px;">Instruktur Pelaksana</div>
+                        <div id="cert-instructor"
+                            style="font-weight: 900; color: #001c37; border-bottom: 2px solid #001c37; display: inline-block; font-size: 15px;">
+                            Lalu Arif Trasna Ashari</div>
+                        <div style="font-size: 10px; color: #94a3b8; margin-top: 5px;">NIP: <span
+                                id="cert-ins-id">-</span></div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <div id="qrcode"
+                            style="padding: 8px; background: white; border: 1.5px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+                        </div>
+                        <div
+                            style="font-size: 7px; font-weight: 800; color: #94a3b8; margin-top: 8px; letter-spacing: 1px; text-transform: uppercase;">
+                            Scan to Verify</div>
+                    </div>
+
+                    <div style="text-align: center; width: 280px;">
+                        <div id="cert-date" style="font-size: 12px; color: #64748b; margin-bottom: 50px;">Mataram, -</div>
+                        <div
+                            style="font-weight: 900; color: #001c37; border-bottom: 2px solid #001c37; display: inline-block; font-size: 15px;">
+                            Ketua Dewan Pembina</div>
+                        <div style="font-size: 10px; color: #94a3b8; margin-top: 5px;">ID VERIFIKASI: <span
+                                id="cert-id-raw" style="font-family: monospace; font-weight: bold;">-</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const modal = document.getElementById('sertifikat-modal');
+        const modalContainer = document.getElementById('modal-container');
+        const form = document.getElementById('sertifikat-form');
+
+        // Security: HTML Sanitizer Helper
+        function escapeHTML(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        async function fetchSertifikasi() {
+            const tbody = document.getElementById('sertifikat-table-body');
+            try {
+                // Try fetching with instructor name and NIP
+                let { data, error } = await client
+                    .from('sertifikasi')
+                    .select('*, pendaftar(nama_lengkap, kejuruan(nama_kejuruan, instruktur_name, instruktur_nip))')
+                    .order('created_at', { ascending: false });
+
+                // Fallback for older schema
+                if (error && (error.code === 'PGRST204' || error.message.includes('instruktur_nip'))) {
+                    const fallback = await client
+                        .from('sertifikasi')
+                        .select('*, pendaftar(nama_lengkap, kejuruan(nama_kejuruan, instruktur_name))')
+                        .order('created_at', { ascending: false });
+                    data = fallback.data;
+                    error = fallback.error;
+                }
+
+                if (error) throw error;
+
+                tbody.innerHTML = '';
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="px-10 py-8 text-center text-slate-400 font-bold uppercase tracking-widest">Belum ada data sertifikat</td></tr>`;
+                    return;
+                }
+
+                data.forEach(s => {
+                    const safeName = escapeHTML(s.pendaftar?.nama_lengkap || 'Unknown');
+                    const safeProgram = escapeHTML(s.pendaftar?.kejuruan?.nama_kejuruan || '-');
+                    const safeNo = escapeHTML(s.nomor_sertifikat);
+                    const instructorName = s.pendaftar?.kejuruan?.instruktur_name || 'Lalu Arif Trasna Ashari';
+                    const instructorNip = s.pendaftar?.kejuruan?.instruktur_nip || '19820311 200501 1 002';
+                    
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-slate-50/50 transition-premium group';
+                    tr.innerHTML = `
+                        <td class="px-10 py-8">
+                            <div class="flex flex-col">
+                                <span class="font-mono font-black text-indigo-600 tracking-wider text-sm">${safeNo}</span>
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Terbit: ${new Date(s.tanggal_terbit).toLocaleDateString('id-ID')}</span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-8">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-slate-400">person</span>
+                                </div>
+                                <span class="font-black text-slate-800 tracking-tight">${safeName}</span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-8">
+                            <div class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-600 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider">
+                                <span class="material-symbols-outlined text-lg">school</span>
+                                ${safeProgram}
+                            </div>
+                        </td>
+                        <td class="px-10 py-8 text-right">
+                            <div class="flex justify-end gap-3 transition-premium">
+                                <button onclick="printCertificate('${safeNo}', '${safeName}', '${safeProgram}', '${escapeHTML(instructorName)}', '${escapeHTML(instructorNip)}')" class="w-11 h-11 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-premium shadow-sm border border-indigo-100">
+                                    <span class="material-symbols-outlined text-xl">print</span>
+                                </button>
+                                <button onclick="deleteSertifikat(${s.id})" class="w-11 h-11 bg-red-50 text-red-500 rounded-xl flex items-center justify-center hover:bg-red-500 hover:text-white transition-premium shadow-sm border border-red-100">
+                                    <span class="material-symbols-outlined text-xl">delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error('Error loading data:', err);
+                tbody.innerHTML = `<tr><td colspan="4" class="px-10 py-8 text-center text-red-500 font-bold uppercase tracking-widest">Gagal memuat data: ${err.message}</td></tr>`;
+            }
+        }
+
+        async function openModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modalContainer.classList.remove('scale-95', 'opacity-0');
+                modalContainer.classList.add('scale-100', 'opacity-100');
+            }, 10);
+
+            document.getElementById('nomor_sertifikat').value = `CERT-${Math.floor(1000 + Math.random() * 9000)}-${new Date().getFullYear()}`;
+
+            const select = document.getElementById('pendaftar_id');
+            const { data } = await client.from('pendaftar').select('id, nama_lengkap');
+            select.innerHTML = '<option value="">-- Pilih Peserta --</option>';
+            data.forEach(p => {
+                select.innerHTML += `<option value="${p.id}">${p.nama_lengkap}</option>`;
+            });
+        }
+
+        function closeModal() {
+            modalContainer.classList.add('scale-95', 'opacity-0');
+            modalContainer.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                pendaftar_id: document.getElementById('pendaftar_id').value,
+                nomor_sertifikat: document.getElementById('nomor_sertifikat').value
+            };
+
+            try {
+                await client.from('sertifikasi').insert([payload]);
+                closeModal();
+                fetchSertifikasi();
+            } catch (err) {
+                alert('Gagal menerbitkan: ' + err.message);
+            }
+        });
+
+        window.deleteSertifikat = async function (id) {
+            if (!confirm('Hapus sertifikat ini?')) return;
+            await client.from('sertifikasi').delete().eq('id', id);
+            fetchSertifikasi();
+        }
+
+        window.printCertificate = function (certNo, name, program, instructor, nip) {
+            const template = document.getElementById('certificate-template');
+
+            // Fill Template with Data
+            document.getElementById('cert-name').textContent = name;
+            document.getElementById('cert-program').textContent = program;
+            document.getElementById('cert-no').textContent = certNo;
+
+            // Update Instructor & NIP Dynamically
+            if (document.getElementById('cert-instructor')) {
+                document.getElementById('cert-instructor').textContent = instructor || 'Lalu Arif Trasna Ashari';
+            }
+            if (document.getElementById('cert-ins-id')) {
+                document.getElementById('cert-ins-id').textContent = nip || '19820311 200501 1 002';
+            }
+
+            // Generate QR Code for Verification
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = ''; // Clear previous QR
+
+            // Create Verification Link (Placeholder for now)
+            const verifId = `VH-${new Date().getFullYear()}-${certNo.split('/').pop() || Math.floor(Math.random() * 1000)}`;
+            const verificationUrl = `https://vocationalhub-verify.vercel.app/verify.html?id=${verifId}`;
+
+            new QRCode(qrContainer, {
+                text: verificationUrl,
+                width: 70,
+                height: 70,
+                colorDark: "#001c37",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            // Also update the Verification ID in the footer
+            if (document.getElementById('cert-id-raw')) {
+                document.getElementById('cert-id-raw').textContent = verifId;
+            }
+            document.getElementById('cert-date').textContent = new Date().toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+
+            // Temporarily show template for PDF capture
+            template.classList.remove('hidden');
+
+            const options = {
+                margin: 0,
+                filename: `Sertifikat_${name.replace(/\s+/g, '_')}.pdf`,
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 3, useCORS: true, logging: false },
+                jsPDF: { unit: 'px', format: [1050, 740], orientation: 'landscape' }
+            };
+
+            // Generate and save PDF
+            html2pdf().set(options).from(template).save().then(() => {
+                template.classList.add('hidden');
+            }).catch(err => {
+                console.error('PDF Error:', err);
+                alert('Gagal mencetak sertifikat.');
+                template.classList.add('hidden');
+            });
+        }
+
+        async function exportToExcel() {
+            try {
+                // 1. Fetch Certification Data
+                const { data: certData } = await client
+                    .from('sertifikasi')
+                    .select('nomor_sertifikat, tanggal_terbit, pendaftar(nama_lengkap, kejuruan(nama_kejuruan))')
+                    .order('created_at', { ascending: false });
+
+                // 2. Fetch Registration Data
+                const { data: regData } = await client
+                    .from('pendaftar')
+                    .select('nama_lengkap, email, status, created_at, kejuruan(nama_kejuruan)')
+                    .order('created_at', { ascending: false });
+
+                // Format Certification Data for Excel
+                const certs = certData.map(s => ({
+                    'No. Sertifikat': s.nomor_sertifikat,
+                    'Nama Peserta': s.pendaftar?.nama_lengkap || '-',
+                    'Program Pelatihan': s.pendaftar?.kejuruan?.nama_kejuruan || '-',
+                    'Tanggal Terbit': new Date(s.tanggal_terbit).toLocaleDateString('id-ID')
+                }));
+
+                // Format Registration Data for Excel
+                const registrations = regData.map(r => ({
+                    'Nama Peserta': r.nama_lengkap,
+                    'Email': r.email,
+                    'Program Pilihan': r.kejuruan?.nama_kejuruan || '-',
+                    'Status': r.status.toUpperCase(),
+                    'Tanggal Daftar': new Date(r.created_at).toLocaleDateString('id-ID')
+                }));
+
+                // Create Workbook
+                const wb = XLSX.utils.book_new();
+
+                // Add Certification Sheet
+                const wsCert = XLSX.utils.json_to_sheet(certs);
+                XLSX.utils.book_append_sheet(wb, wsCert, "Data Sertifikasi");
+
+                // Add Registration Sheet
+                const wsReg = XLSX.utils.json_to_sheet(registrations);
+                XLSX.utils.book_append_sheet(wb, wsReg, "Data Pendaftaran");
+
+                // Generate and Download File
+                const fileName = `Laporan_BLK_LOTENG_${new Date().toISOString().split('T')[0]}.xlsx`;
+                XLSX.writeFile(wb, fileName);
+
+            } catch (err) {
+                console.error('Export Error:', err);
+                alert('Gagal mengekspor data ke Excel.');
+            }
+        }
+
+        window.onload = fetchSertifikasi;
+    </script>
+</body>
+
+</html>

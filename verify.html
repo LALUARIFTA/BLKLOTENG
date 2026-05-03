@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Verifikasi keaslian sertifikat BLK LOTENG Anda secara online. Masukkan ID Sertifikat untuk melihat validitas data.">
+    <meta name="keywords" content="Verifikasi Sertifikat BLK, Validasi Sertifikat Lombok, Cek Keaslian Sertifikat">
+    <meta name="author" content="Lalu Arif Trasna Ashari">
+
+    <!-- Security: Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.supabase.co; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self' data: https://*.supabase.co;">
+    <title>Verifikasi Sertifikat - BLK LOTENG</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        body { background: #f8f9ff; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .valid-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background min-h-screen flex flex-col items-center justify-center p-6">
+    
+    <div class="w-full max-w-lg">
+        <!-- Logo -->
+        <div class="text-center mb-10">
+            <div class="flex items-center justify-center gap-3 mb-2">
+                <div class="w-12 h-12 bg-[#001c37] rounded-2xl flex items-center justify-center shadow-xl">
+                    <span class="material-symbols-outlined text-white text-3xl">verified</span>
+                </div>
+                <h1 class="text-2xl font-black tracking-tighter text-[#001c37]">BLK<span class="text-blue-500">LOTENG</span></h1>
+            </div>
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-[0.3em]">Certificate Verification Portal</p>
+        </div>
+
+        <!-- Result Card -->
+        <div id="loading-state" class="glass-card rounded-[40px] p-12 text-center shadow-2xl">
+            <div class="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-6"></div>
+            <p class="font-bold text-slate-500">Memverifikasi Sertifikat...</p>
+        </div>
+
+        <div id="valid-state" class="hidden glass-card rounded-[40px] overflow-hidden shadow-2xl border-2 border-white">
+            <div class="valid-badge p-10 text-center text-white">
+                <span class="material-symbols-outlined text-6xl mb-4">verified_user</span>
+                <h2 class="text-2xl font-black">SERTIFIKAT VALID</h2>
+                <p class="text-sm font-medium opacity-80 mt-1">Diterbitkan oleh BLK LOTENG Indonesia</p>
+            </div>
+            
+            <div class="p-10 space-y-6">
+                <div>
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Nama Peserta</label>
+                    <p id="res-name" class="text-xl font-black text-slate-800 italic">Lalu Arif Trasna Ashari</p>
+                </div>
+                
+                <div>
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Program Pelatihan</label>
+                    <p id="res-program" class="text-lg font-bold text-blue-600">Teknik Informatika & Jaringan</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 pt-4 border-t border-slate-100">
+                    <div>
+                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">ID Verifikasi</label>
+                        <p id="res-id" class="font-mono font-bold text-slate-600">VH-2024-X92</p>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Tanggal Terbit</label>
+                        <p id="res-date" class="font-bold text-slate-600">12 Mei 2024</p>
+                    </div>
+                </div>
+
+                <div class="pt-6">
+                    <button onclick="window.print()" class="w-full bg-slate-100 text-slate-600 py-4 rounded-2xl font-black text-sm hover:bg-slate-200 transition-premium flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-xl">print</span>
+                        Cetak Bukti Verifikasi
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="error-state" class="hidden glass-card rounded-[40px] p-12 text-center shadow-2xl border-2 border-red-100">
+            <div class="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="material-symbols-outlined text-4xl">gpp_maybe</span>
+            </div>
+            <h2 class="text-xl font-black text-slate-800">Sertifikat Tidak Ditemukan</h2>
+            <p class="text-sm text-slate-400 mt-2 leading-relaxed">Maaf, data sertifikat dengan ID tersebut tidak terdaftar di sistem kami atau telah ditarik kembali.</p>
+            <a href="index.html" class="inline-block mt-8 text-blue-500 font-bold hover:underline">Kembali ke Beranda</a>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-10">
+            &copy; 2024 BLK LOTENG &bull; Digital Trust System
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script>
+        const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Security: HTML Sanitizer Helper
+        function escapeHTML(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        async function verifyCertificate() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const verifId = urlParams.get('id');
+
+            if (!verifId) {
+                showState('error');
+                return;
+            }
+
+            try {
+                // Search in database
+                const certNoPart = verifId.split('-').pop();
+                
+                const { data, error } = await client
+                    .from('sertifikasi')
+                    .select('*, pendaftar(nama_lengkap, kejuruan(nama_kejuruan))')
+                    .or(`nomor_sertifikat.ilike.%${certNoPart}%`)
+                    .single();
+
+                if (error || !data) {
+                    showState('error');
+                    return;
+                }
+
+                // Populate Data (Sanitized)
+                document.getElementById('res-name').textContent = data.pendaftar?.nama_lengkap;
+                document.getElementById('res-program').textContent = data.pendaftar?.kejuruan?.nama_kejuruan;
+                document.getElementById('res-id').textContent = escapeHTML(verifId);
+                document.getElementById('res-date').textContent = new Date(data.tanggal_terbit).toLocaleDateString('id-ID', {
+                    day: 'numeric', month: 'long', year: 'numeric'
+                });
+
+                showState('valid');
+            } catch (err) {
+                console.error(err);
+                showState('error');
+            }
+        }
+
+        function showState(state) {
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('valid-state').classList.add('hidden');
+            document.getElementById('error-state').classList.add('hidden');
+            
+            document.getElementById(`${state}-state`).classList.remove('hidden');
+        }
+
+        window.onload = verifyCertificate;
+    </script>
+</body>
+</html>
